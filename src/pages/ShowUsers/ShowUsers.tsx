@@ -109,7 +109,7 @@ const ShowUsers = (props: Props) => {
     }
     const deleteUser = (userId: string) => {
 
-        axios.put('delete-user', { userId: userId })
+        axios.delete(`delete-user?userId=${userId}`)
             .then(response => {
 
 
@@ -123,15 +123,15 @@ const ShowUsers = (props: Props) => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "user unblocked",
+                    title: "user deleted",
                     showConfirmButton: false,
                     timer: 1500
                 });
-                console.log('User unblocked successfully:', response.data);
+               
             })
             .catch(error => {
 
-                console.error('Error blocking user:', error);
+                console.error('Error deleting user:', error);
             });
 
     }

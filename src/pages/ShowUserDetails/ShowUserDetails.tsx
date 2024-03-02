@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { LuCircleDashed } from 'react-icons/lu';
+import { FaArrowLeft } from 'react-icons/fa';
 interface User {
     _id: string,
     email: string,
@@ -19,6 +20,7 @@ const ShowUserDetails = () => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const { register, handleSubmit, setValue } = useForm<User>();
+    const navigate = useNavigate()
     useEffect(() => {
         // Fetch user details from the API
         axios.get<User>(`get-user?userId=${id}`)
@@ -60,7 +62,7 @@ const ShowUserDetails = () => {
     return (
         <div className="flex flex-col items-center justify-center h-screen text-gray-600">
             <div className="p-4 bg-white rounded-lg shadow-md md:px-7 py-5 relative">
-                <button onClick={()=> navigate(-1)} className='absolute top-8'>Go back</button>
+                <button onClick={()=> navigate(-1)} className='absolute top-8 text-gray-500'><FaArrowLeft /></button>
                 <h1 className="text-3xl font-semibold mb-4 text-center py-2 ">User Details</h1>
                 {isLoading ? (
                     <div>

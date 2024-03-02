@@ -9,7 +9,7 @@
 
 .gradient-text {
   height: fit-content;
-  background-image: linear-gradient(to right, #6993ff,#f65959f8,#ff00dde3 ); 
+  background-image: linear-gradient(to right, #E84545,#782bafcc,#903749 ); 
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
