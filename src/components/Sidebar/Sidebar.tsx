@@ -39,7 +39,7 @@ const SideBar = ({ setSidebarOpen }: Props) => {
                     <h4 className='text-sm text-gray-00 -500 font-medium' >Options</h4>
 
                     <NavLink onClick={() => setSidebarOpen(false)} to='/' className={({ isActive }) =>
-                        isActive ? "text-blue-200" : "text-white"}>
+                        isActive ? "text-yellow-200" : "text-white"}>
 
                         <div className='  flex justify-start gap-2  text-base items-center   font-base  pt-2 mt-1'>
                             <div className='border rounded-md p-1 '>
@@ -49,7 +49,7 @@ const SideBar = ({ setSidebarOpen }: Props) => {
                         </div>
                     </NavLink>
                     <NavLink onClick={() => setSidebarOpen(false)} to='/create-user' className={({ isActive }) =>
-                        isActive ? "text-blue-200  " : "text-white"}>
+                        isActive ? "text-yellow-200  " : "text-white"}>
 
                         <div className=' flex justify-start gap-2  text-base items-center  font-base  pt-2 mt-1'>
                             <div className='border rounded-md p-1 '>
@@ -59,7 +59,7 @@ const SideBar = ({ setSidebarOpen }: Props) => {
                         </div>
                     </NavLink>
                     <NavLink onClick={() => setSidebarOpen(false)} to='/show-users' className={({ isActive }) =>
-                        isActive ? "text-blue-200  " : "text-white"}>
+                        isActive ? "text-yellow-200  " : "text-white"}>
                         <div className=' flex justify-start gap-2  text-base items-center  font-base  pt-2 mt-1'>
                             <div className='border rounded-md p-1 '>
                                 <IoPeopleOutline  />

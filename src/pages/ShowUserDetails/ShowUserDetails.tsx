@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { LuCircleDashed } from 'react-icons/lu';
 import { FaArrowLeft } from 'react-icons/fa';
 import { User } from '../../types/types';
+import LoadingUI from './LoadingUI';
 
 
 const ShowUserDetails = () => {
@@ -57,63 +58,13 @@ const ShowUserDetails = () => {
 
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen text-gray-600">
-            <div className="p-4 bg-white rounded-lg shadow-md md:px-7 py-5 relative">
-                <button onClick={() => navigate(-1)} className='absolute top-8 text-gray-500'><FaArrowLeft /></button>
-                <h1 className="text-3xl font-semibold mb-4 text-center py-2 ">User Details</h1>
+        <div className="flex flex-col items-center justify-center h-screen text-gray-600 ">
+             <h1 className="text-3xl font-semibold mb-4 text-center py-2 text-white appear-animation1 ">User Details</h1>
+            <div className="p-4 bg-white rounded-lg shadow-md md:px-7 py-5 relative shadow-2xl">
+                <button title='go back' onClick={() => navigate(-1)} className='absolute left-[60px] top-[-50px] text-xl text-gray-200'><FaArrowLeft /></button>
+               
                 {isLoading ? (
-                    <div>
-                        <table className="md:min-w-full  divide-gray-200">
-                            <tbody className="bg-white  divide-gray-200">
-                                <tr>
-                                    <td className="px-6 py-4 font-bold animate-pulse">Email:</td>
-                                    <td >
-                                        <div className='p-2 rounded-lg border w-40  md:w-52'>
-                                            <LuCircleDashed className='text-3xl text-gray-400 animate-spin ' />
-                                        </div>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="px-6 py-4 font-bold animate-pulse">First Name:</td>
-                                    <td >
-                                        <div className='p-2 rounded-lg border w-40  md:w-52'>
-                                            <LuCircleDashed className='text-3xl text-gray-400 animate-spin ' />
-                                        </div>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="px-6 py-4 font-bold animate-pulse">Last Name:</td>
-                                    <td >
-                                        <div className='p-2 rounded-lg border w-40  md:w-52'>
-                                            <LuCircleDashed className='text-3xl text-gray-400 animate-spin ' />
-                                        </div>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="px-6 py-4 font-bold animate-pulse">Phone Number:</td>
-                                    <td >
-                                        <div className='p-2 rounded-lg border w-40  md:w-52'>
-                                            <LuCircleDashed className='text-3xl text-gray-400 animate-spin ' />
-                                        </div>
-
-                                    </td>
-                                </tr>
-
-
-                            </tbody>
-                        </table>
-                        <div className='flex justify-center w-full animate-pulse'>
-                            <button disabled={true} className="bg-gray-500 text-white px-4 py-2 rounded-lg mt-4 ">
-                               Update
-                                
-                                
-                                </button>
-                        </div>
-                    </div>
-
+                    <LoadingUI />
                 ) : (
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <table className="md:min-w-full ">
@@ -147,12 +98,12 @@ const ShowUserDetails = () => {
                         </table>
                         <div className='flex justify-center'>
                             <button type="submit" className="bg-gradient-to-r to-[#E84545]  from-[#903749ee] text-white px-4 py-2 rounded-md mt-4 hover:scale-110 transition-all ease-in-out shadow-lg hover:shadow">
-                            {!isUpdating?'Update':
-                              
-                              <LuCircleDashed className='text-3xl text-gray-100 animate-spin ' />
-                            
-                             
-                             }
+                                {!isUpdating ? 'Update' :
+
+                                    <LuCircleDashed className='text-3xl text-gray-100 animate-spin ' />
+
+
+                                }
 
                             </button>
                         </div>

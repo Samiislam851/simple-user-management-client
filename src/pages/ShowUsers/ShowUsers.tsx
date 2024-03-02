@@ -40,7 +40,7 @@ const ShowUsers = (props: Props) => {
 
     return (
         <div>
-            <h3 className="text-2xl text-center pb-2">All Users</h3>
+            <h3 className="text-2xl text-start ps-1 pb-2 appear-animation2">All Users</h3>
             <div className=" shadow-2xl">
 
                 <div className="align-middle inline-block min-w-full shadow overflow-hidden rounded-lg border border-gray-200">
@@ -71,12 +71,13 @@ const ShowUsers = (props: Props) => {
                                     {[1, 2, 3,].map(id => (
                                         <tr key={id} className="animate-pulse">
                                             <td className="px-6 py-4 ">
-                                                <div className="h-4 bg-gray-200 rounded "></div>
+                                                <div className={`h-4 bg-${id % 2 ===0?'white':'gray-200'} rounded w-12`}></div>
                                             </td>
                                             <td className="px-6 py-4  flex gap-5 justify-center">
-                                                <div className="h-4 bg-gray-200 rounded w-12"></div>
-                                                <div className="h-4 bg-gray-200 rounded w-12"></div>
-                                                <div className="h-4 bg-gray-200 rounded w-12"></div>
+                                                <div className={`h-4 bg-${id % 2 ===0?'white':'gray-200'} rounded w-12`}></div>
+                                                <div className={`h-4 bg-${id % 2 ===0?'white':'gray-200'} rounded w-12`}></div>
+                                                <div className={`h-4 bg-${id % 2 ===0?'white':'gray-200'} rounded w-12`}></div>
+                                                
 
                                             </td>
 
