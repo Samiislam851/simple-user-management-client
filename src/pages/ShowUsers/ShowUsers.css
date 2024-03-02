@@ -1,0 +1,7 @@
+.table-striped tbody tr:nth-child(even) {
+    background-color: #e8e8e8; /* Light gray color for odd rows */
+  }
+  
+  .table-striped tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* White color for even rows */
+  }
