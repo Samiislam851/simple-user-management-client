@@ -29,7 +29,7 @@ console.log(sidebarOpen);
                 </div>
 
                 <div className="flex-grow">
-                    <div className='h-screen overflow-y-auto overflow-x-hidden flex justify-center items-center  '>
+                    <div className='h-screen overflow-y-auto overflow-x-hidden flex justify-center items-center backdrop-blur-[3px] px-2 '>
                         <Outlet />
                     </div>
                 </div>
