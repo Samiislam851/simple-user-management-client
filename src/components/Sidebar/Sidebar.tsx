@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { IoMdClose } from 'react-icons/io'
+import { IoIosLogOut, IoMdClose } from 'react-icons/io'
 import { NavLink } from 'react-router-dom'
 import { IoHome, IoPeopleOutline, IoPersonAddOutline } from 'react-icons/io5'
+import useAuth from '../../hooks/useAuth'
 
 type Props = {
     setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -10,14 +11,14 @@ type Props = {
 
 const SideBar = ({ setSidebarOpen }: Props) => {
 
+    const { user, logOut } = useAuth()!
 
-    // // console.log(user);
-    // const logOutFunc = async () => {
-    //     // if (logOut) {
+    const logOutFunc = async () => {
+        if (logOut) {
 
-    //     //     await logOut()
-    //     // }
-    // }
+            await logOut()
+        }
+    }
 
 
 
@@ -61,12 +62,12 @@ const SideBar = ({ setSidebarOpen }: Props) => {
                         isActive ? "text-yellow-200  " : "text-white"}>
                         <div className=' flex justify-start gap-2  text-base items-center  font-base  pt-2 mt-1'>
                             <div className='border rounded-md p-1 '>
-                                <IoPeopleOutline  />
+                                <IoPeopleOutline />
                             </div>
                             <span>Show Users</span>
                         </div>
                     </NavLink>
-                
+
 
 
 
@@ -77,19 +78,10 @@ const SideBar = ({ setSidebarOpen }: Props) => {
             </div>
 
             {/* Bottom */}
-            {/* <div className="px-2 py-3">
+            <div className="px-2 py-3">
                 <div className="flex w-full gap-3 justify-between items-center text-gray-00 shadow-xl bg-white bg-opacity-10 px-2 py-2 rounded-lg border-t border-gray-500 border-opacity-50">
 
-                    <div className='basis-[20%]'>
-
-
-                        <div
-                            style={{ backgroundImage: `url(${user?.photoURL})` }}
-                            className="w-14 h-14 bg-cover bg-center rounded-full "
-                        >
-                    
-                        </div>
-                    </div>
+                 
                     <div className='basis-[60%]'>
                         <h3 className='text-xl font-medium'>{user?.displayName!}</h3>
                         <h4 className='text-sm text-gray-00 -500'>{user?.email}</h4>
@@ -98,7 +90,7 @@ const SideBar = ({ setSidebarOpen }: Props) => {
                         <IoIosLogOut className="w-8 h-8 text-red-600" />
                     </button>
                 </div>
-            </div> */}
+            </div>
         </div>
 
     )

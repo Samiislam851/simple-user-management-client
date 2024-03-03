@@ -1,7 +1,7 @@
 
 
 import './App.css'
-import {  RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './Layout/Layout'
 import Homepage from './pages/Homepage/Homepage.tsx'
 import CreateUser from './pages/CreateUser/CreateUser.tsx'
@@ -9,19 +9,27 @@ import ShowUsers from './pages/ShowUsers/ShowUsers.tsx'
 import axios from 'axios'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx'
 import ShowUserDetails from './pages/ShowUserDetails/ShowUserDetails.tsx'
+import useAuth from './hooks/useAuth.tsx'
+import Login from './pages/Login/Login.tsx'
+import RegisterPage from './pages/Register/Register.tsx'
+import PrivateRoute from './PrivateRoute/PrivateRoute.tsx'
 function App() {
 
 
   axios.defaults.baseURL = `http://localhost:3000/`
 
 
+  const {loggedIn, user} = useAuth()!
+console.log('loggedIn ==', loggedIn);
+
+  
 
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout />,
-      errorElement: <NotFoundPage/>,
+      element: <PrivateRoute><Layout /></PrivateRoute>  ,
+      errorElement: <NotFoundPage />,
       children: [
         {
           path: '/',
@@ -40,15 +48,22 @@ function App() {
           element: <ShowUserDetails />
         },
 
-      
-      
-      ]
-    }
 
+
+      ]
+    },
+    {
+      path :'/login',
+      element: <Login/>
+    },
+    {
+      path :'/register',
+      element: <RegisterPage/>
+    }
 
   ])
   return (
- <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   )
 }
 
