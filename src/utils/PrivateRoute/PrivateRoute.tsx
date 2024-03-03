@@ -8,7 +8,7 @@ type Props = {
 }
 
 const PrivateRoute = ({ children }: Props) => {
-    const { loggedIn, user, loading } = useAuth()!;
+    const { user, loading } = useAuth()!;
     console.log('user from private route', user);
     if (!loading) {
 

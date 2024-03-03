@@ -59,9 +59,9 @@ const CreateUser = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold mb-4  py-2 text-white appear-animation2 text-start">Create User</h1>
+      <h1 className="text-3xl font-semibold mb-4  py-2 text-white appear-animation text-start">Create User</h1>
 
-      <div className="p-4 bg-white rounded-lg shadow-md md:px-7 py-5 relative shadow-2xl text-gray-500 md:w-80">
+      <div className="appear-animation2 p-4 bg-white rounded-lg shadow-md md:px-7 py-5 relative shadow-2xl text-gray-500 md:w-80">
         <p className='pb-3 text-gray-400'>Enter these details about user</p>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 w-full  flex flex-col items-center">
           <div className='w-full px-5'>

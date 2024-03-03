@@ -1,7 +1,7 @@
 import { User, UserCredential, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
 import React, { ReactNode, createContext, useEffect, useState } from 'react'
 import app from '../firebase/firebaseConfig'
-import { useNavigate } from 'react-router-dom'
+import axiosConfig from '../axiosConfig/axiosConfig'
 
 type Props = {
     children: ReactNode
@@ -17,7 +17,8 @@ export interface valueType {
     logOut: () => void,
     emailSignIn: (email: string, password: string) => Promise<UserCredential>,
     setUser: React.Dispatch<React.SetStateAction<User | null>>,
-    user: User | null
+    user: User | null,
+    setToken: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 
@@ -53,12 +54,13 @@ const ContextProvider = ({ children }: Props) => {
     }
 
 
-    ////////////////////// Sign Out ////////////////////////////
     const logOut = () => {
         setLoading(true)
         signOut(auth).then(() => {
             setUser(null);
             setLoading(false)
+            setToken(null)
+            localStorage.removeItem('user-management')
         }).catch((error) => {
             console.log(error);
         });
@@ -66,31 +68,46 @@ const ContextProvider = ({ children }: Props) => {
 
 
 
+    const [token, setToken] = useState<string|null>(localStorage.getItem('user-management'))
 
     useEffect(() => {
-     
+        axiosConfig(token)
+    }, [token])
+
+
+
+
+
+
+
+
+
+
+
+    useEffect(() => {
+
         console.log('outside auth state changed unsubscribe');
         const unsubscribe = onAuthStateChanged(auth, (loggedUser: User | null) => {
             setUser(loggedUser)
             console.log('on auth state changed func user:', loggedUser);
             setLoading(false)
-          });
-          
+        });
+
         console.log('user ::: after onAuthStateChanged', user);
-        
-      return () => {
-        console.log('unsubscribing');
-        unsubscribe()
-      }
+
+        return () => {
+            console.log('unsubscribing');
+            unsubscribe()
+        }
     }, [])
 
     console.log(user);
-    
+
 
 
 
     const value: valueType = {
-        emailRegister, addUserDetails, logOut, emailSignIn, setLoading, loading, setLoggedIn, loggedIn, setUser, user
+        emailRegister, addUserDetails, logOut, emailSignIn, setLoading, loading, setLoggedIn, loggedIn, setUser, user, setToken
     }
 
     return (

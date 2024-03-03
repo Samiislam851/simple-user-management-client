@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast from 'react-hot-toast';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useForm } from 'react-hook-form';
-
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 
 type Props = {};
+
 type inputObject = {
     name: string,
     email: string,
@@ -17,13 +17,12 @@ type inputObject = {
 };
 
 const RegisterPage = ({ }: Props) => {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState(false);
 
 
-    const navigate = useNavigate();
 
-    const { setLoggedIn, setLoading, addUserDetails, logOut, emailRegister } = useAuth()!;
+    const { setLoggedIn, setLoading, addUserDetails, logOut, emailRegister,setToken } = useAuth()!;
 
     const { register, handleSubmit } = useForm<inputObject>();
 
@@ -34,11 +33,9 @@ const RegisterPage = ({ }: Props) => {
     const saveUserToDB = async (user: any, retries = 3) => {
         try {
             const res = await axios.post('/saveUser', user);
-
-            
             if (res.status === 200) {
                 localStorage.setItem('user-management', res.data.token);
-                navigate('/');
+                setToken(res.data.token)
                 setLoggedIn(true)
             } else {
                 await logOut();
@@ -59,7 +56,7 @@ const RegisterPage = ({ }: Props) => {
         const userData = { ...data };
         setLoading(true);
         emailRegister(userData.email, userData.password)
-            .then((userCredential) => {
+            .then(() => {
                 setLoading(true);
                 addUserDetails(userData.name).then(() => {
                     setLoading(false);
@@ -88,16 +85,13 @@ const RegisterPage = ({ }: Props) => {
             <div className='w-fit '>
                 <div className='rounded-lg py-10 backdrop-blur-md bg-gray-300 bg-opacity-[0.09] border border-opacity-10 border-gray-400 max-w-md  transition-all ease-in-out duration-500   '>
                     <div className='w-fit mx-auto'>
-                        <h3 className='text-3xl font-bold text-gray-300'>Chitchatz</h3>
+                        <h3 className='text-3xl font-bold text-gray-300'>User Atlas</h3>
                     </div>
 
                     <h3 className='text-xl text-white font-thin md:font-thin px-5 md:px-10 mb-6'>Create an account</h3>
 
                     <form className='max-w-md  px-5 md:px-10 mx-auto flex flex-col items-center justify-center gap-1 pb-5' onSubmit={handleSubmit(handleRegister)} >
                         <input required {...register('name')} className='p-2 m-2 w-full rounded-lg border border-gray-300 focus:border-gray-500 focus:outline-gray-300' type="text" placeholder='Enter your Name' />
-
-
-
 
 
                         <input required {...register('email')}
@@ -123,7 +117,7 @@ const RegisterPage = ({ }: Props) => {
                                 {showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
                             </button>
                         </div>
-                        <button  className={` border py-2 px-4 rounded-lg bg-[#81689D] text-white hover:shadow-xl transition-all ease-in-out duration-300 hover:scale-105 border-0 `}>
+                        <button className={` border py-2 px-4 rounded-lg bg-[#81689D] text-white hover:shadow-xl transition-all ease-in-out duration-300 hover:scale-105 border-0 `}>
                             {isLoading ?
                                 <AiOutlineLoading3Quarters className='text-3xl animate-spin' />
                                 :

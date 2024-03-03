@@ -10,7 +10,7 @@
 }
 
 .appear-animation2 {
-    animation: slide-in2 2s ease-out;
+    animation: slide-in2 1s ease-out;
     /* transition: all 1s ease-in; */
 }
 

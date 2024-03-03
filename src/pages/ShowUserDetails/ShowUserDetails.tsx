@@ -68,7 +68,7 @@ const ShowUserDetails = () => {
         <div className="flex flex-col items-center justify-center h-screen text-gray-600 ">
              <h1 className="text-3xl font-semibold mb-4 text-center py-2 text-white appear-animation1 ">User Details</h1>
             <div className="p-4 bg-white rounded-lg shadow-md md:px-7 py-5 relative shadow-2xl">
-                <button title='go back' onClick={() => navigate(-1)} className='absolute left-[60px] top-[-50px] text-xl text-gray-200'><FaArrowLeft /></button>
+                <button title='go back' onClick={() => navigate(-1)} className='appear-animation2 absolute left-[60px] top-[-50px] text-xl text-gray-200'><FaArrowLeft /></button>
                
                 {isLoading ? (
                     <LoadingUI />

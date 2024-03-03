@@ -15,7 +15,6 @@ const SideBar = ({ setSidebarOpen }: Props) => {
 
     const logOutFunc = async () => {
         if (logOut) {
-
             await logOut()
         }
     }

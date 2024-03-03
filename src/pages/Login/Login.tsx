@@ -10,7 +10,7 @@ import axios from 'axios';
 
 import { useForm } from 'react-hook-form';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 
@@ -29,11 +29,11 @@ export default function Login({ }: Props) {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [showPassword, setShowPassword] = useState(false);
 
-    const navigate = useNavigate()
 
 
 
-    const { setUser, logOut, emailSignIn, setLoggedIn, setLoading } = useAuth()!
+
+    const { setUser, logOut, emailSignIn, setLoggedIn, setLoading, setToken } = useAuth()!
 
 
 
@@ -62,9 +62,10 @@ export default function Login({ }: Props) {
             if (res.status == 200) {
 
                 localStorage.setItem('user-management', res.data.token)
+                setToken(res.data.token)
                 setLoggedIn(true)
-                navigate('/');
-            } 
+
+            }
 
         } catch (error) {
             await logOut()
@@ -90,10 +91,10 @@ export default function Login({ }: Props) {
                 console.log('userCredentials from firebase..', user);
                 loginFromDB(user)
                 setUser(user);
-              
+
                 setIsLoading(false);
                 setLoading(false);
-             
+
             })
                 .catch((error: any) => {
                     const errorMessage = error.message;
@@ -111,7 +112,7 @@ export default function Login({ }: Props) {
                 <div className='w-fit '>
                     <div className='rounded-lg py-5 backdrop-blur-md bg-gray-200 bg-opacity-[0.09] border border-opacity-10 border-gray-400 max-w-md  transition-all ease-in-out duration-500 hover:shadow-2xl '>
                         <div className='w-fit mx-auto'>
-                            <h3 className='text-3xl font-bold text-gray-300'>Chitchatz</h3>
+                            <h3 className='text-3xl font-bold text-gray-300'>Users Atlas</h3>
                         </div>
 
                         <h3 className='text-xl text-white font-thin md:font-thin px-5 md:px-10 mb-6'>Sign in to you account</h3>
@@ -144,7 +145,7 @@ export default function Login({ }: Props) {
                             </button>
                         </form>
                         <div className='max-w-md  px-5 md:px-10'>
-                            <h3 className='text-gray-200 text-center  text-sm py-3'> New to NextChat? <span className='animate-pulse text-base text-blue-300'> <Link to={'/register'} >Create an account!</Link> </span></h3>
+                            <h3 className='text-gray-200 text-center  text-sm py-3'> New to UsersAtlas? <span className='animate-pulse text-base text-blue-300'> <Link to={'/register'} >Create an account!</Link> </span></h3>
 
 
 

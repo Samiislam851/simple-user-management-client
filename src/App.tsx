@@ -17,10 +17,10 @@ import RestrictedPublicRoute from './utils/RestrictedPublicRoute/RestrictedPubli
 function App() {
 
 
-  axios.defaults.baseURL = `http://localhost:3000/`
+ 
 
 
-  const {loggedIn, user} = useAuth()!
+  const {loggedIn} = useAuth()!
 console.log('loggedIn ==', loggedIn);
 
   
