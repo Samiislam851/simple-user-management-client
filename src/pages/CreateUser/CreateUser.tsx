@@ -6,11 +6,14 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { LuCircleDashed } from 'react-icons/lu';
 import { User } from '../../types/types';
+import useAuth from '../../hooks/useAuth';
 
 const CreateUser = () => {
   const { register, handleSubmit } = useForm<User>();
   const [isCreatingUser, setIsCreatingUser] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const { logOut } = useAuth()!
 
   const onSubmit = (data: Partial<User>) => {
     const isEmptyField = Object.values(data).some(value => !value);
@@ -38,18 +41,27 @@ const CreateUser = () => {
           });
 
           setIsCreatingUser(false);
-          navigate('/'); 
+          navigate('/');
         })
         .catch(error => {
-          console.error('Error creating user:', error);
-          Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: `${error.response.data.message}`,
-            showConfirmButton: false,
-            timer: 1500
-          });
-
+          if (error?.response?.status === 400 || error?.response?.status === 401) {
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: `${error.response.data.message} please log in again`,
+              showConfirmButton: false,
+              timer: 1500
+            });
+            logOut()
+          } else {
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: `${error.response.data.message}`,
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
           setIsCreatingUser(false);
         });
 

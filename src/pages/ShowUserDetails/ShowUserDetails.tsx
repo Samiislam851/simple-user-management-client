@@ -7,6 +7,7 @@ import { LuCircleDashed } from 'react-icons/lu';
 import { FaArrowLeft } from 'react-icons/fa';
 import { User } from '../../types/types';
 import LoadingUI from './LoadingUI';
+import useAuth from '../../hooks/useAuth';
 
 
 const ShowUserDetails = () => {
@@ -14,7 +15,7 @@ const ShowUserDetails = () => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [isUpdating, setIsUpdating] = useState<boolean>(false)
-
+    const {logOut} = useAuth()!
     const { register, handleSubmit } = useForm<User>();
     const navigate = useNavigate()
     useEffect(() => {
@@ -26,13 +27,25 @@ const ShowUserDetails = () => {
                 setIsLoading(false)
             })
             .catch(error => {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "error",
-                    title: `${error.response.data.message}`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
+                if (error?.response?.status === 400 || error?.response?.status === 401) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message} please log in again`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    logOut()
+                } else {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                }
                 console.error('Error fetching user details:', error);
                 setIsLoading(false)
             });
@@ -56,6 +69,28 @@ const ShowUserDetails = () => {
                 setIsUpdating(false)
             })
             .catch(error => {
+
+                if (error?.response?.status === 400 || error?.response?.status === 401) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message} please log in again`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    logOut()
+                } else {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                }
+
+
                 console.error('Error updating user details:', error);
                 setIsUpdating(false)
             });
@@ -66,10 +101,10 @@ const ShowUserDetails = () => {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen text-gray-600 ">
-             <h1 className="text-3xl font-semibold mb-4 text-center py-2 text-white appear-animation1 ">User Details</h1>
+            <h1 className="text-3xl font-semibold mb-4 text-center py-2 text-white appear-animation1 ">User Details</h1>
             <div className="p-4 bg-white rounded-lg shadow-md md:px-7 py-5 relative shadow-2xl">
                 <button title='go back' onClick={() => navigate(-1)} className='appear-animation2 absolute left-[60px] top-[-50px] text-xl text-gray-200'><FaArrowLeft /></button>
-               
+
                 {isLoading ? (
                     <LoadingUI />
                 ) : (

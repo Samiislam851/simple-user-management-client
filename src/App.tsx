@@ -8,7 +8,6 @@ import CreateUser from './pages/CreateUser/CreateUser.tsx'
 import ShowUsers from './pages/ShowUsers/ShowUsers.tsx'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx'
 import ShowUserDetails from './pages/ShowUserDetails/ShowUserDetails.tsx'
-import useAuth from './hooks/useAuth.tsx'
 import Login from './pages/Login/Login.tsx'
 import RegisterPage from './pages/Register/Register.tsx'
 import PrivateRoute from './utils/PrivateRoute/PrivateRoute.tsx'
@@ -19,8 +18,7 @@ function App() {
  
 
 
-  const {loggedIn} = useAuth()!
-console.log('loggedIn ==', loggedIn);
+
 
   
 

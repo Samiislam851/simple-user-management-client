@@ -3,6 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../types/types';
 import Swal from 'sweetalert2';
+import useAuth from '../../hooks/useAuth';
 
 type Props = {
 
@@ -13,7 +14,7 @@ type Props = {
 const UserTableData = ({ user, setUsers }: Props) => {
 
 
-
+    const { logOut } = useAuth()!
 
     const navigate = useNavigate();
 
@@ -23,10 +24,7 @@ const UserTableData = ({ user, setUsers }: Props) => {
     const blockUser = (userId: string) => {
 
         axios.put('block-user', { userId: userId })
-            .then(response => {
-
-
-
+            .then(() => {
                 setUsers((prevUsers) => {
                     const newUsers = prevUsers.map(user => {
                         if (user._id === userId) {
@@ -37,7 +35,6 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     return newUsers
                 })
 
-
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -45,16 +42,28 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                console.log('User blocked successfully:', response.data);
+
             })
             .catch(error => {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "error",
-                    title: `${error.response.data.message}`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
+                if (error?.response?.status === 400 || error?.response?.status === 401) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message} please log in again`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    logOut()
+                } else {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                }
 
                 console.error('Error blocking user:', error);
             });
@@ -85,17 +94,28 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                
+
             })
             .catch(error => {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "error",
-                    title: `${error.response.data.message}`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                console.error('Error blocking user:', error);
+                if (error?.response?.status === 400 || error?.response?.status === 401) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message} please log in again`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    logOut()
+                } else {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                }
             });
 
     }
@@ -122,14 +142,25 @@ const UserTableData = ({ user, setUsers }: Props) => {
 
             })
             .catch(error => {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "error",
-                    title: `${error.response.data.message}`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                console.error('Error deleting user:', error);
+                if (error?.response?.status === 400 || error?.response?.status === 401) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message} please log in again`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    logOut()
+                } else {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                }
             });
 
     }

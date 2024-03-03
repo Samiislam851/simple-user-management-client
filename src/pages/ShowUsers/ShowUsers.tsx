@@ -5,6 +5,7 @@ import './ShowUsers.css'
 import UserTableData from "../../components/UserTableData/UserTableData"
 import { User } from "../../types/types"
 import Swal from "sweetalert2"
+import useAuth from "../../hooks/useAuth"
 
 
 
@@ -14,7 +15,7 @@ const ShowUsers = () => {
 
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-
+    const { logOut } = useAuth()!
 
     useEffect(() => {
         setLoading(true)
@@ -29,15 +30,31 @@ const ShowUsers = () => {
                 setLoading(false)
             })
             .catch(error => {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "error",
-                    title: `${error.response.data.message}`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                console.error("An error occurred:", error);
+              
+
                 setLoading(false)
+                if (error?.response?.status === 400 || error?.response?.status === 401) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message} please log in again`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    logOut()
+                }else{
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `${error.response.data.message}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                }
+              
+
+
             });
 
     }, [])
@@ -78,13 +95,13 @@ const ShowUsers = () => {
                                     {[1, 2, 3,].map(id => (
                                         <tr key={id} className="animate-pulse">
                                             <td className="px-6 py-4 ">
-                                                <div className={`h-4 bg-${id % 2 ===0?'white':'gray-200'} rounded w-12`}></div>
+                                                <div className={`h-4 bg-${id % 2 === 0 ? 'white' : 'gray-200'} rounded w-12`}></div>
                                             </td>
                                             <td className="px-6 py-4  flex gap-5 justify-center">
-                                                <div className={`h-4 ${id % 2 ===0?'bg-white':'bg-gray-400'} rounded w-12`}></div>
-                                                <div className={`h-4 ${id % 2 ===0?'bg-white':'bg-gray-400'} rounded w-12`}></div>
-                                                <div className={`h-4 ${id % 2 ===0?'bg-white':'bg-gray-400'} rounded w-12`}></div>
-                                                
+                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-400'} rounded w-12`}></div>
+                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-400'} rounded w-12`}></div>
+                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-400'} rounded w-12`}></div>
+
 
                                             </td>
 
