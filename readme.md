@@ -41,7 +41,7 @@ The project is a simple user management dashboard that allows administrators to 
 
 ## Technologies  
  Technologies used in this application are: 
-  1. ###Client
+  1. ### Client
      * React-vite
      * React-router
      * Firebase
@@ -49,7 +49,7 @@ The project is a simple user management dashboard that allows administrators to 
      * Axios
      * SweetAlert
 
-  2. ###Server
+  2. ### Server
      * Node 
      * Express
      * MongoDB
