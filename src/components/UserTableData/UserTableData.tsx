@@ -48,6 +48,13 @@ const UserTableData = ({ user, setUsers }: Props) => {
                 console.log('User blocked successfully:', response.data);
             })
             .catch(error => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `${error.response.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
 
                 console.error('Error blocking user:', error);
             });
@@ -56,7 +63,7 @@ const UserTableData = ({ user, setUsers }: Props) => {
     const unBlockUser = (userId: string) => {
 
         axios.put('unblock-user', { userId: userId })
-            .then(response => {
+            .then(() => {
 
 
 
@@ -78,10 +85,16 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                console.log('User unblocked successfully:', response.data);
+                
             })
             .catch(error => {
-
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `${error.response.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 console.error('Error blocking user:', error);
             });
 
@@ -89,7 +102,7 @@ const UserTableData = ({ user, setUsers }: Props) => {
     const deleteUser = (userId: string) => {
 
         axios.delete(`delete-user?userId=${userId}`)
-            .then(response => {
+            .then(() => {
 
 
 
@@ -109,7 +122,13 @@ const UserTableData = ({ user, setUsers }: Props) => {
 
             })
             .catch(error => {
-
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `${error.response.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 console.error('Error deleting user:', error);
             });
 

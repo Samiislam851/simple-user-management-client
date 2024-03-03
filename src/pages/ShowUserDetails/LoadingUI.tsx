@@ -1,9 +1,9 @@
-import React from 'react'
+
 import { LuCircleDashed } from 'react-icons/lu'
 
-type Props = {}
 
-const LoadingUI = (props: Props) => {
+
+const LoadingUI = () => {
   return (
     <div>
     <table className="md:min-w-full  divide-gray-200">

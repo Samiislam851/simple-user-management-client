@@ -3,10 +3,10 @@ import { Outlet } from 'react-router-dom'
 import Sidebar from '../components/Sidebar/Sidebar'
 import { RxHamburgerMenu } from 'react-icons/rx'
 
-type Props = {}
 
 
-const Layout = (props: Props) => {
+
+const Layout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
 

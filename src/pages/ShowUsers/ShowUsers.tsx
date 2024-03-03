@@ -2,15 +2,15 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import './ShowUsers.css'
 
-import { useNavigate } from "react-router-dom"
 import UserTableData from "../../components/UserTableData/UserTableData"
 import { User } from "../../types/types"
-type Props = {}
+import Swal from "sweetalert2"
 
 
 
 
-const ShowUsers = (props: Props) => {
+
+const ShowUsers = () => {
 
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -29,6 +29,13 @@ const ShowUsers = (props: Props) => {
                 setLoading(false)
             })
             .catch(error => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `${error.response.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 console.error("An error occurred:", error);
                 setLoading(false)
             });

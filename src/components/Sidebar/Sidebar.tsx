@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 
-import { IoIosLogOut, IoIosPeople, IoMdClose } from 'react-icons/io'
-import { Link, NavLink } from 'react-router-dom'
+import { IoMdClose } from 'react-icons/io'
+import { NavLink } from 'react-router-dom'
 import { IoHome, IoPeopleOutline, IoPersonAddOutline } from 'react-icons/io5'
-import { FaArrowRight } from 'react-icons/fa'
 
 type Props = {
     setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -12,13 +11,13 @@ type Props = {
 const SideBar = ({ setSidebarOpen }: Props) => {
 
 
-    // console.log(user);
-    const logOutFunc = async () => {
-        // if (logOut) {
+    // // console.log(user);
+    // const logOutFunc = async () => {
+    //     // if (logOut) {
 
-        //     await logOut()
-        // }
-    }
+    //     //     await logOut()
+    //     // }
+    // }
 
 
 

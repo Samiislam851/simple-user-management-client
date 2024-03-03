@@ -26,6 +26,13 @@ const ShowUserDetails = () => {
                 setIsLoading(false)
             })
             .catch(error => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `${error.response.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 console.error('Error fetching user details:', error);
                 setIsLoading(false)
             });
