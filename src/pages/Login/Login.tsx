@@ -113,9 +113,9 @@ export default function Login({ }: Props) {
 
             <div className='background min-h-[100vh] text-center flex flex-col-reverse md:flex-row gap-10 justify-center items-center '>
                 <div className='w-fit '>
-                    <div className='rounded-lg py-5 backdrop-blur-md bg-gray-200 bg-opacity-[0.09] border border-opacity-10 border-gray-400 max-w-md  transition-all ease-in-out duration-500 hover:shadow-2xl '>
+                    <div className='rounded-lg py-5 backdrop-blur-[2px] bg-gray-100 bg-opacity-20 border border-opacity-20 border-gray-400 max-w-md  transition-all ease-in-out duration-500 hover:shadow-2xl '>
                         <div className='w-fit mx-auto'>
-                            <h3 className='text-3xl font-bold text-gray-300'>Users Atlas</h3>
+                            <h3 className='text-3xl font-bold  text-white'>Users Atlas</h3>
                         </div>
 
                         <h3 className='text-xl text-white font-thin md:font-thin px-5 md:px-10 mb-6'>Sign in to you account</h3>
@@ -139,7 +139,7 @@ export default function Login({ }: Props) {
                                 </button>
                             </div>
 
-                            <button className='border py-2 px-4 rounded-lg bg-[#81689D] text-white hover:shadow-xl transition-all ease-in-out duration-300 hover:scale-105 border-0 '>
+                            <button className='border py-2 px-4 rounded-lg bg-[#924fdf] text-white hover:shadow-xl transition-all ease-in-out duration-300 hover:scale-105 border-0 '>
                                 {isLoading ?
                                     <AiOutlineLoading3Quarters className='text-2xl animate-spin' />
                                     :
@@ -148,7 +148,7 @@ export default function Login({ }: Props) {
                             </button>
                         </form>
                         <div className='max-w-md  px-5 md:px-10'>
-                            <h3 className='text-gray-200 text-center  text-sm py-3'> New to UsersAtlas? <span className='animate-pulse text-base text-blue-300'> <Link to={'/register'} >Create an account!</Link> </span></h3>
+                            <h3 className='text-white text-center  text-sm py-3'> New to UsersAtlas? <span className='animate-pulse text-lg'> <Link to={'/register'} >Create an account!</Link> </span></h3>
 
 
 
