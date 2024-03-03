@@ -12,7 +12,8 @@ import ShowUserDetails from './pages/ShowUserDetails/ShowUserDetails.tsx'
 import useAuth from './hooks/useAuth.tsx'
 import Login from './pages/Login/Login.tsx'
 import RegisterPage from './pages/Register/Register.tsx'
-import PrivateRoute from './PrivateRoute/PrivateRoute.tsx'
+import PrivateRoute from './utils/PrivateRoute/PrivateRoute.tsx'
+import RestrictedPublicRoute from './utils/RestrictedPublicRoute/RestrictedPublicRoute.tsx'
 function App() {
 
 
@@ -54,11 +55,11 @@ console.log('loggedIn ==', loggedIn);
     },
     {
       path :'/login',
-      element: <Login/>
+      element: <RestrictedPublicRoute>  <Login/> </RestrictedPublicRoute> 
     },
     {
       path :'/register',
-      element: <RegisterPage/>
+      element:  <RestrictedPublicRoute>  <RegisterPage/> </RestrictedPublicRoute> 
     }
 
   ])

@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import useAuth from "../hooks/useAuth"
+import useAuth from "../../hooks/useAuth"
 import { Navigate } from "react-router-dom"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
@@ -24,8 +24,6 @@ const PrivateRoute = ({ children }: Props) => {
         
          <AiOutlineLoading3Quarters 
          className='text-5xl text-center animate-spin mx-auto' />
-
-         
     </div></>
 }
 
