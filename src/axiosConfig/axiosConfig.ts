@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const axiosConfig = ( token : string | null ) => {
 
-axios.defaults.baseURL = `http://localhost:3000/`
+axios.defaults.baseURL = `https://simple-user-management-dashboard-server.onrender.com/`
 
     axios.interceptors.request.use(
 

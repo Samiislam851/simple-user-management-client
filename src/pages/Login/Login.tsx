@@ -68,6 +68,9 @@ export default function Login({ }: Props) {
             }
 
         } catch (error) {
+
+            console.log('error from login', error);
+            
             await logOut()
         } finally {
             setIsLoading(false)
