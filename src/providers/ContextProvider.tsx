@@ -63,6 +63,7 @@ const ContextProvider = ({ children }: Props) => {
             localStorage.removeItem('user-management')
         }).catch((error) => {
             console.log(error);
+            
         });
     }
 
@@ -86,22 +87,17 @@ const ContextProvider = ({ children }: Props) => {
 
     useEffect(() => {
 
-        console.log('outside auth state changed unsubscribe');
         const unsubscribe = onAuthStateChanged(auth, (loggedUser: User | null) => {
             setUser(loggedUser)
-            console.log('on auth state changed func user:', loggedUser);
             setLoading(false)
         });
 
-        console.log('user ::: after onAuthStateChanged', user);
 
         return () => {
-            console.log('unsubscribing');
             unsubscribe()
         }
     }, [])
 
-    console.log(user);
 
 
 

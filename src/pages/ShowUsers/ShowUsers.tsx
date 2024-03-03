@@ -25,7 +25,6 @@ const ShowUsers = () => {
                     setUsers(res.data.users);
 
                 } else {
-                    console.log("Request was not successful. Status code:", res.status);
                 }
                 setLoading(false)
             })

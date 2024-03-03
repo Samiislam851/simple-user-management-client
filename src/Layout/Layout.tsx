@@ -10,7 +10,6 @@ const Layout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
 
-console.log(sidebarOpen);
 
     return (
         <div className='relative overflow-hidden text-white'>

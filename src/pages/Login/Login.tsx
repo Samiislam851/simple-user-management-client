@@ -69,7 +69,6 @@ export default function Login({ }: Props) {
 
         } catch (error) {
 
-            console.log('error from login', error);
             
             await logOut()
         } finally {
@@ -83,7 +82,6 @@ export default function Login({ }: Props) {
 
 
     const handleLogin = (data: inputObject) => {
-        console.log(data);
         if (/^\s*$/.test(data.email) || /^\s*$/.test(data.password)) {
             toast.error('Please Enter something ')
         } else {
@@ -91,7 +89,6 @@ export default function Login({ }: Props) {
             setLoading(true)
             emailSignIn(data.email, data.password).then((userCredential) => {
                 const user = userCredential.user;
-                console.log('userCredentials from firebase..', user);
                 loginFromDB(user)
                 setUser(user);
 

@@ -60,7 +60,6 @@ const RegisterPage = ({ }: Props) => {
                 setLoading(true);
                 addUserDetails(userData.name).then(() => {
                     setLoading(false);
-                    console.log('Profile updated');
                 }).catch((err) => {
                     toast.error(err.message);
                     setLoading(false);

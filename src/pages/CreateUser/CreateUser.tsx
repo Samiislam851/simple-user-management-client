@@ -30,8 +30,7 @@ const CreateUser = () => {
 
       setIsCreatingUser(true);
       axios.post(`create-user`, data)
-        .then(response => {
-          console.log('User created successfully:', response.data);
+        .then(() => {
           Swal.fire({
             position: "top-end",
             icon: "success",

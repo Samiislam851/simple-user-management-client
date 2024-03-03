@@ -22,7 +22,6 @@ const ShowUserDetails = () => {
         // Fetch user details from the API
         axios.get<User>(`get-user?userId=${id}`)
             .then(response => {
-                console.log('Response data:', response.data);
                 setUser(response.data);
                 setIsLoading(false)
             })
@@ -56,8 +55,7 @@ const ShowUserDetails = () => {
     const onSubmit = (data: Partial<User>) => {
         setIsUpdating(true)
         axios.put(`edit-user?userId=${id}`, data)
-            .then(response => {
-                console.log('User details updated:', response.data);
+            .then(() => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
