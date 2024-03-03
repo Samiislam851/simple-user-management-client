@@ -86,22 +86,22 @@ The project is a simple user management dashboard that allows administrators to 
 
 ## ScreenShots
    Here are some snapshots of the application
-  1. ## Login Page
+  1. ### Login Page
        <img src="https://i.ibb.co/LSvhP7d/loginpage.png" alt="login" width="500px" />
 
-  2. ## Home Page
+  2. ### Home Page
      <img src="https://i.ibb.co/fQ9z5Fw/HomePage.png" alt="Home" width="500px" />
 
-  3. ## Create User Page
+  3. ### Create User Page
       <img src="https://i.ibb.co/8c1FV09/Create-User.png" alt="Create" width="500px" />
 
-  4. ## Show Users Page
+  4. ### Show Users Page
       <img src="https://i.ibb.co/QY2yF8d/Show-Users.png" alt="Show" width="500px" />
 
-  5. ## User Details/Edit Page
+  5. ### User Details/Edit Page
       <img src="https://i.ibb.co/q0f6zyh/User-details.png" alt="User" width="500px" />
 
-  6. ## Notification
+  6. ### Notification
       <img src="https://i.ibb.co/Y2rtbqw/notification.png" alt="Notification" width="500px" />
 
 
