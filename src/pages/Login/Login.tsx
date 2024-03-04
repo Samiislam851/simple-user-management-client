@@ -32,6 +32,7 @@ export default function Login({ }: Props) {
 
 
 
+
     const { setUser, logOut, emailSignIn, setLoggedIn, setLoading, setToken } = useAuth()!
 
 
@@ -54,56 +55,26 @@ export default function Login({ }: Props) {
 
     const loginFromDB = async (user: any) => {
 
-        let retryCount = 0;
-        const maxRetries = 4; // Maximum number of retry attempts
-        const retryDelay = 20; // Delay between retry attempts in milliseconds
-    
-        while (retryCount < maxRetries) {
-            try {
-                const res = await axios.post('/login', user);
-    
-                if (res.status === 200) {
-                    localStorage.setItem('user-management', res.data.token);
-                    setToken(res.data.token);
-                    setUser(user);
-                    setLoggedIn(true);
-                    setLoading(false);
-                    return; // Exit function on successful login
-                }
-            } catch (error : any) {
-                console.error('Error logging in to server:', error);
-                if (error.response && (error.response.status === 400 || error.response.status === 404)) {
-                    // Retry only for 400 or 401 errors
-                    if (retryCount === maxRetries - 1) {
-                        // Max retries reached, logout and handle error
-                        await logOut()
-                        setLoading(false);
-                        setIsLoading(false);
-                        return;
-                    }
-                } else {
-                    // Error other than 400 or 401, handle accordingly
-                    setLoading(false);
-                    setIsLoading(false);
-                   
-                    return;
-                }
+
+        try {
+            const res = await axios.post('/login', user)
+
+            if (res.status == 200) {
+
+                localStorage.setItem('user-management', res.data.token)
+                setToken(res.data.token)
+                setLoggedIn(true)
+
             }
-    
-            // Increment retry count and wait before retrying
-            retryCount++;
-            console.log(`Retrying login attempt ${retryCount} in ${retryDelay / 1000} seconds...`);
-            await new Promise(resolve => setTimeout(resolve, retryDelay));
+
+        } catch (error) {
+
+            
+            await logOut()
+        } finally {
+            setIsLoading(false)
         }
-
-    
-        // Max retries reached without success
-        console.error('Max retry attempts reached without successful login');
-        setLoading(false);
-        setIsLoading(false);
-        logOut()
-    };
-
+    }
 
 
 
@@ -119,8 +90,10 @@ export default function Login({ }: Props) {
             emailSignIn(data.email, data.password).then((userCredential) => {
                 const user = userCredential.user;
                 loginFromDB(user)
+                setUser(user);
+
                 setIsLoading(false);
-           
+                setLoading(false);
 
             })
                 .catch((error: any) => {
