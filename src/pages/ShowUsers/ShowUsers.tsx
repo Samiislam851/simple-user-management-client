@@ -91,16 +91,15 @@ const ShowUsers = () => {
 
                                 :
                                 <>
-                                    {[1, 2, 3,].map(id => (
+                                    {[1, 2, 3,4].map(id => (
                                         <tr key={id} className="animate-pulse">
                                             <td className="px-6 py-4 ">
-                                                <div className={`h-4 bg-${id % 2 === 0 ? 'white' : 'gray-200'} rounded w-12`}></div>
+                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-300'} rounded w-16`}></div>
                                             </td>
                                             <td className="px-6 py-4  flex gap-5 justify-center">
-                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-400'} rounded w-12`}></div>
-                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-400'} rounded w-12`}></div>
-                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-400'} rounded w-12`}></div>
-
+                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-300'} rounded w-16`}></div>
+                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-300'} rounded w-16`}></div>
+                                                <div className={`h-4 ${id % 2 === 0 ? 'bg-white' : 'bg-gray-300'} rounded w-16`}></div>
 
                                             </td>
 

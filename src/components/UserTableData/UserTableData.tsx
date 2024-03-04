@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../types/types';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
+import { LuCircleDashed } from 'react-icons/lu';
 
 type Props = {
 
@@ -18,14 +19,17 @@ const UserTableData = ({ user, setUsers }: Props) => {
 
     const navigate = useNavigate();
 
-
+    const [blockingLoading, setBlockingLoading] = useState(false)
+    const [deleteLoading, setDeleteLoading] = useState(false)
 
 
     const blockUser = (userId: string) => {
-
+        setBlockingLoading(true)
         axios.put('block-user', { userId: userId })
             .then(() => {
+
                 setUsers((prevUsers) => {
+
                     const newUsers = prevUsers.map(user => {
                         if (user._id === userId) {
                             return { ...user, isBlocked: true }
@@ -34,7 +38,7 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     })
                     return newUsers
                 })
-
+                setBlockingLoading(false)
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -64,13 +68,13 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     });
 
                 }
-
+                setBlockingLoading(false)
                 console.error('Error blocking user:', error);
             });
 
     }
     const unBlockUser = (userId: string) => {
-
+        setBlockingLoading(true)
         axios.put('unblock-user', { userId: userId })
             .then(() => {
 
@@ -86,7 +90,7 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     return newUsers
                 })
 
-
+                setBlockingLoading(false)
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -116,11 +120,14 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     });
 
                 }
+
+                setBlockingLoading(true)
+
             });
 
     }
     const deleteUser = (userId: string) => {
-
+        setDeleteLoading(true)
         axios.delete(`delete-user?userId=${userId}`)
             .then(() => {
 
@@ -131,6 +138,7 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     return newUsers
                 })
 
+                setDeleteLoading(false)
 
                 Swal.fire({
                     position: "top-end",
@@ -161,6 +169,7 @@ const UserTableData = ({ user, setUsers }: Props) => {
                     });
 
                 }
+                setDeleteLoading(false)
             });
 
     }
@@ -189,25 +198,49 @@ const UserTableData = ({ user, setUsers }: Props) => {
                 <div className="basis-[1/3]">
 
 
-                    <button onClick={() => handleViewDetails(user._id)} className={`${commonButtonClass}  text-white  bg-[#51578a] md:px-5 shadow`} >Details</button>
+                    <button onClick={() => handleViewDetails(user._id)} className={`${commonButtonClass}  text-white  bg-[#51578a] md:px-5 shadow  flex justify-center items-center`} >Details</button>
                 </div>
 
 
                 <div className="basis-[1/3]">
                     {user.isBlocked ?
                         <>
-                            <button onClick={() => unBlockUser(user._id)} className={`${commonButtonClass}  border-green-300 text-white  bg-green-500 md:w-20`} >Unblock</button>
+                            <button disabled={blockingLoading} onClick={() => unBlockUser(user._id)} className={`${commonButtonClass}  border-green-300 text-white  bg-green-500 md:w-20 flex justify-center items-center`} >
+                                {blockingLoading ?
+                                    <LuCircleDashed className='animate-spin my-1' />
+                                    :
+                                    <span>Unblock</span>
+
+                                }
+
+                            </button>
                         </>
                         :
                         <>
-                            <button onClick={() => blockUser(user._id)} className={`${commonButtonClass}  text-white bg-[#53354A]  hover:bg-red-500 w-16 md:w-20`} >Block</button>
+                            <button disabled={blockingLoading} onClick={() => blockUser(user._id)} className={`${commonButtonClass}  text-white bg-[#53354A] flex justify-center items-center  md:hover:bg-red-500 w-16 md:w-20`} >
+                                {blockingLoading ?
+                                    <LuCircleDashed className='animate-spin my-1' /> :
+                                    <span>Block</span>
+                                }
+
+                            </button>
                         </>}
                 </div>
                 <div className="basis-[1/3]"
-                ><button
-                    onClick={() => deleteUser(user._id)}
-                    className={`${commonButtonClass}  md:px-5 text-white  bg-[#E84545]`}
-                >Delete</button></div>
+                >
+                    <button
+                        disabled={deleteLoading}
+                        onClick={() => deleteUser(user._id)}
+                        className={`${commonButtonClass}  md:px-5 text-white  bg-[#E84545] flex justify-center items-center`} >
+                        {
+                            deleteLoading ?
+                                <LuCircleDashed className='animate-spin my-1' />
+                                :
+                                <span>Delete</span>
+                        }
+                    </button>
+
+                </div>
 
 
 
