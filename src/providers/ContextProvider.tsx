@@ -80,6 +80,7 @@ const ContextProvider = ({ children }: Props) => {
 
 
 
+console.log(user);
 
 
 

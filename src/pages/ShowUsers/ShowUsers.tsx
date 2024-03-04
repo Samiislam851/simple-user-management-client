@@ -84,7 +84,7 @@ const ShowUsers = () => {
 
                                 <>
                                     {users.map(user => (
-                                        <UserTableData setUsers={setUsers} user={user} />
+                                        <UserTableData key={user._id} setUsers={setUsers} user={user} />
                                     ))}
 
                                 </>
