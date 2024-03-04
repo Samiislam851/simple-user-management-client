@@ -188,7 +188,7 @@ const UserTableData = ({ user, setUsers }: Props) => {
 
 
     return (
-        <tr key={user._id} className="text-gray-600">
+        <tr  className="text-gray-600">
             <td className="px-6 py-4 ">
                 <div className="h-6 rounded  overflow-x-auto font-medium">{user.firstName} {user.lastName}</div>
             </td>
