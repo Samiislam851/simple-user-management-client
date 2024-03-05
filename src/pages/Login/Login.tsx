@@ -60,7 +60,6 @@ export default function Login({ }: Props) {
             const res = await axios.post('/login', user)
 
             if (res.status == 200) {
-
                 localStorage.setItem('user-management', res.data.token)
                 setToken(res.data.token)
                 setLoggedIn(true)
